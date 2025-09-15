@@ -10,7 +10,11 @@ namespace LibAdminSystem.Context
         public DbSet<Member> Members => Set<Member>();
         public DbSet<Loan> Loans => Set<Loan>();
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public LibraryContext(DbContextOptions<LibraryContext> options) : base(options)
+        {
+        }
+        
+        /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var config = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
@@ -18,6 +22,6 @@ namespace LibAdminSystem.Context
 
             var connectionString = config.GetConnectionString("LibAdminSystem");
             optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
-        }
+        }*/
     }
 }
