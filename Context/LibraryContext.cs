@@ -1,5 +1,6 @@
 ﻿using LibAdminSystem.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace LibAdminSystem.Context
 {
@@ -11,7 +12,11 @@ namespace LibAdminSystem.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var connectionString = "server=localhost;database=LibraryDb;user=root;password=divyendu";
+            var config = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .Build();
+
+            var connectionString = config.GetConnectionString("LibAdminSystem");
             optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
         }
     }
