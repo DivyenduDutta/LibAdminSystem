@@ -1,23 +1,25 @@
 using LibAdminSystem.Context;
-using LibAdminSystem.Models;
+using LibAdminSystem.Utility;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
 
-using var context = new LibraryContext();
+var host = Host.CreateDefaultBuilder(args)
+    .ConfigureServices((context, services) =>
+    {
+        services.AddDbContext<LibraryContext>(options =>
+            options.UseMySql(
+                context.Configuration.GetConnectionString("LibAdminSystem"),
+                ServerVersion.AutoDetect(context.Configuration.GetConnectionString("LibAdminSystem"))
+            ));
+    })
+    .Build();
 
-// Ensure DB created
-context.Database.EnsureCreated();
+using var scope = host.Services.CreateScope();
+var context = scope.ServiceProvider.GetRequiredService<LibraryContext>();
 
-// Seed data if empty
-if (!context.Books.Any())
-{
-    var book1 = new Book { Title = "1984", Author = "George Orwell", Year = 1949, Genre = "Dystopian", CopiesAvailable = 5 };
-    var book2 = new Book { Title = "The Hobbit", Author = "J.R.R. Tolkien", Year = 1937, Genre = "Fantasy", CopiesAvailable = 3 };
+SeedData.Initialize(context);
 
-    var member1 = new Member { Name = "Alice", Email = "alice@mail.com", JoinDate = DateTime.Now.AddYears(-1) };
-    var member2 = new Member { Name = "Bob", Email = "bob@mail.com", JoinDate = DateTime.Now.AddMonths(-6) };
-
-    context.AddRange(book1, book2, member1, member2);
-    context.SaveChanges();
-}
 
 /*var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
