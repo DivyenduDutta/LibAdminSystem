@@ -15,8 +15,8 @@ namespace LibAdminSystem.Utility
             {
                 var books = new[]
                 {
-                    new Book { Title = "1984", Author = "George Orwell", Year = 1949, Genre = "Dystopian", CopiesAvailable = 5 },
-                    new Book { Title = "The Hobbit", Author = "J.R.R. Tolkien", Year = 1937, Genre = "Fantasy", CopiesAvailable = 3 }
+                    new Book { BookTitle = "1984", Author = "George Orwell", Year = 1949, Genre = "Dystopian", CopiesAvailable = 5 },
+                    new Book { BookTitle = "The Hobbit", Author = "J.R.R. Tolkien", Year = 1937, Genre = "Fantasy", CopiesAvailable = 3 }
                 };
 
                 context.Books.AddRange(books);
