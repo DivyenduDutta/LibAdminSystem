@@ -34,6 +34,17 @@ namespace LibAdminSystem.Utility
                 context.Members.AddRange(members);
             }
 
+            if (!context.Loans.Any())
+            {
+                var loans = new[]
+                {
+                    new Loan { BookId = 1, MemberId = 1, LoanDate = DateTime.Now.AddDays(-10), ReturnDate = null },
+                    new Loan { BookId = 2, MemberId = 1, LoanDate = DateTime.Now.AddDays(-12), ReturnDate = null },
+                    new Loan { BookId = 2, MemberId = 2, LoanDate = DateTime.Now.AddDays(-20), ReturnDate = DateTime.Now.AddDays(-5) }
+                };
+                context.Loans.AddRange(loans);
+            }
+
             context.SaveChanges();
         }
     }
