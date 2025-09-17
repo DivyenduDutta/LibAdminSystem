@@ -1,0 +1,49 @@
+﻿@LibAdminSystem_HostAddress = http://localhost:5280
+
+GET {{LibAdminSystem_HostAddress}}/api/books
+
+###
+
+@id=1
+GET {{LibAdminSystem_HostAddress}}/api/books/{{id}}
+
+###
+
+@id=1
+GET {{LibAdminSystem_HostAddress}}/api/members/{{id}}
+
+###
+
+POST {{LibAdminSystem_HostAddress}}/api/members/add
+Content-Type: application/json
+
+{
+  "name" : "Carrey",
+  "email" : "carrey@gmail.com",
+  "joinDate" : "2024-09-12T10:16:10.771526"
+}
+
+###
+
+@id=4
+PUT {{LibAdminSystem_HostAddress}}/api/loans/{{id}}
+Content-Type: application/json
+
+{
+  "id" : 4,
+  "bookId": 1,
+  "memberId" : 1,
+  "loanDate" : "2025-09-06T00:00:00",
+  "returnDate" : "2025-09-17T00:00:00"
+}
+
+###
+@id=4
+GET {{LibAdminSystem_HostAddress}}/api/loans/{{id}}
+
+###
+
+@id=5
+DELETE {{LibAdminSystem_HostAddress}}/api/loans/{{id}}
+
+###
