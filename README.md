@@ -36,3 +36,7 @@ dotnet ef database update
 ```
 
 Run `Program.cs` to seed the database with sample data.
+
+Run `dotnet format --dry-run LibAdminSystem.sln` to check first for formatting/linting errors. 
+
+Then either fix manually or run `dotnet format LibAdminSystem.sln`
