@@ -24,4 +24,4 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
     - name: Check code formatting
-      run: dotnet format --verify-no-changes
+      run: dotnet format --verify-no-changes LibAdminSystem.sln
