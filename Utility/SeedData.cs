@@ -4,7 +4,7 @@ using LibAdminSystem.Models;
 namespace LibAdminSystem.Utility
 {
     public static class SeedData
-{
+    {
         public static void Initialize(LibraryContext context)
         {
             // Ensure DB is created

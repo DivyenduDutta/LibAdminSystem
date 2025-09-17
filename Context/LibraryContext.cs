@@ -13,7 +13,7 @@ namespace LibAdminSystem.Context
         public LibraryContext(DbContextOptions<LibraryContext> options) : base(options)
         {
         }
-        
+
         /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var config = new ConfigurationBuilder()

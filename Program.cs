@@ -4,9 +4,11 @@ using LibAdminSystem.Utility;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 
-public class Program {
+public class Program
+{
 
-    private static void SampleLINQ(LibraryContext context) { 
+    private static void SampleLINQ(LibraryContext context)
+    {
         // LINQ queries
 
         // 1. Get all Books
@@ -36,14 +38,14 @@ public class Program {
 
         var topBooks = context.Loans
             .GroupBy(l => l.Book.BookTitle)
-            .Select(g => new { BookTitle = g.Key, BorrowCount = g.Count()})
+            .Select(g => new { BookTitle = g.Key, BorrowCount = g.Count() })
             .OrderByDescending(b => b.BorrowCount)
             .Take(3)
             .ToList();
 
         Console.WriteLine("\nTop 3 Most Borrowed Books: ");
 
-        foreach (var book in topBooks) 
+        foreach (var book in topBooks)
         {
             Console.WriteLine($"{book.BookTitle} was borrowed {book.BorrowCount} times");
         }
@@ -58,7 +60,7 @@ public class Program {
 
         Console.WriteLine("\nBooks borrowed by more than one member");
 
-        foreach(var book in multiBorrowed) 
+        foreach (var book in multiBorrowed)
         {
             Console.WriteLine($"{book.BookTitle} was borrowed {book.BorrowCount} times");
         }
@@ -73,13 +75,14 @@ public class Program {
 
         Console.WriteLine("\nTop 3 most recently joined members who currently have at least 1 active loan (not returned)");
 
-        foreach(var member in topRecentMembers)
+        foreach (var member in topRecentMembers)
         {
             Console.WriteLine($"{member.Name} - {member.Loans.Count} - {member.JoinDate:d}");
         }
     }
 
-    public static void Main(string[] args) {
+    public static void Main(string[] args)
+    {
         const bool SHOULD_LINQ_BE_RUN = false;
         var builder = WebApplication.CreateBuilder(args);
 
@@ -97,7 +100,7 @@ public class Program {
         {
             var context = scope.ServiceProvider.GetRequiredService<LibraryContext>();
             SeedData.Initialize(context);
-            if(SHOULD_LINQ_BE_RUN)
+            if (SHOULD_LINQ_BE_RUN)
                 SampleLINQ(context);
         }
 
@@ -125,11 +128,12 @@ public class Program {
         );
 
         // POST /api/members -> add a new member
-        membersApi.MapPost("/add", async(Member member, LibraryContext db) => { 
+        membersApi.MapPost("/add", async (Member member, LibraryContext db) =>
+        {
             db.Members.Add(member);
             await db.SaveChangesAsync();
             return Results.Created($"/api/members/{member.Id}", member);
-         });
+        });
 
         var loansApi = app.MapGroup("/api/loans");
 
@@ -141,7 +145,8 @@ public class Program {
         );
 
         // PUT /api/loan/{id} -> update an existing loan's return date
-        loansApi.MapPut("/{id:int}", async (int id, Loan loan, LibraryContext db) => {
+        loansApi.MapPut("/{id:int}", async (int id, Loan loan, LibraryContext db) =>
+        {
             var currentLoan = await db.Loans.FindAsync(id);
             if (currentLoan == null) return Results.NotFound();
 
@@ -151,7 +156,8 @@ public class Program {
         });
 
         // DELETE /api/loan/{id} -> delete a loan with given id
-        loansApi.MapDelete("{id:int}", async (int id, LibraryContext db) => {
+        loansApi.MapDelete("{id:int}", async (int id, LibraryContext db) =>
+        {
             var currentLoan = await db.Loans.FindAsync(id);
             if (currentLoan == null) return Results.NotFound();
 
@@ -160,7 +166,7 @@ public class Program {
             return Results.NoContent();
 
         });
-        
+
 
         app.Run();
     }
