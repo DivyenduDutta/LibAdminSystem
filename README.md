@@ -148,6 +148,9 @@ Refer to [LibAdminSystem.http](https://github.com/DivyenduDutta/LibAdminSystem/b
 
 ## Documentation
 
+
+### REST Api Documentation
+
 LibAdminSystem uses Swagger UI via Swashbuckle. This provides a full interactive web UI where we can test endpoints right from 
 the browser.
 
@@ -162,4 +165,65 @@ The following functionality is provided via Swagger:
 - “Try it out” button to execute requests against the running service
 
 <img src="swagger_api_doc.png" alt="api_doc_">
+
+### UML Diagram
+
+```
+
+classDiagram
+    class Book {
+      +int Id
+      +string BookTitle
+      +string Author
+      +int Year
+      +string Genre
+      +int CopiesAvailable
+    }
+
+    class Member {
+      +int Id
+      +string Name
+      +string Email
+      +DateTime JoinDate
+    }
+
+    class Loan {
+      +int Id
+      +int BookId
+      +int MemberId
+      +DateTime LoanDate
+      +DateTime? ReturnDate
+    }
+
+    Book "1" --> "*" Loan
+    Member "1" --> "*" Loan
+
+```
+
+### System Architecture
+
+```
+flowchart TD
+    subgraph API[ASP.NET Core Minimal APIs]
+        A[REST Endpoints]
+    end
+
+    subgraph EF[Entity Framework Core]
+        B[DbContext]
+        C[LINQ Queries]
+    end
+
+    subgraph DB[MySQL Database]
+        D[(Books Table)]
+        E[(Members Table)]
+        F[(Loans Table)]
+    end
+
+    A --> B
+    B --> C
+    C --> D
+    C --> E
+    C --> F
+
+```
 
