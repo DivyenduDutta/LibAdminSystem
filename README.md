@@ -168,6 +168,7 @@ The following functionality is provided via Swagger:
 
 ### UML Diagram
 
+```mermaid
 classDiagram
     class Book {
       +int Id
@@ -195,9 +196,11 @@ classDiagram
 
     Book "1" --> "*" Loan
     Member "1" --> "*" Loan
+```
 
 ### System Architecture
 
+```mermaid
 flowchart TD
     subgraph API[ASP.NET Core Minimal APIs]
         A[REST Endpoints]
@@ -219,4 +222,4 @@ flowchart TD
     C --> D
     C --> E
     C --> F
-
+```
