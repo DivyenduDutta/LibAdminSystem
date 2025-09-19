@@ -116,7 +116,7 @@ tested with the `LibAdminSystem.http` file using [Endpoints Explorer](https://le
 
 ### Sanity
 
-Run `dotnet format --dry-run LibAdminSystem.sln` to check first for formatting/linting errors. 
+Run `dotnet format LibAdminSystem.sln --verify-no-changes` to check first for formatting/linting errors. 
 
 Then either fix manually or run `dotnet format LibAdminSystem.sln`
 

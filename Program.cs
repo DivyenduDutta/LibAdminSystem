@@ -85,7 +85,7 @@ public class Program
     {
         const bool SHOULD_LINQ_BE_RUN = false;
         var builder = WebApplication.CreateBuilder(args);
-        
+
         // Add Swagger
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
