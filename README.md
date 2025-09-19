@@ -67,7 +67,7 @@ The goal of this project is to serve as both:
 
 ### Prerequisites
 
-Install the following NuGet packages:
+Install the following NuGet packages (if it doesnt get installed automatically):
 	
 - `Microsoft.EntityFrameworkCore`
 
@@ -76,6 +76,8 @@ Install the following NuGet packages:
 - `Microsoft.EntityFrameworkCore.Tools`	
 
 - `Microsoft.EntityFrameworkCore.Design`
+
+- `Swashbuckle.AspNetCore` - For Swagger REST API documentation support
 
 ### Setup
 
@@ -120,7 +122,7 @@ Then either fix manually or run `dotnet format LibAdminSystem.sln`
 
 ## API Endpoints
 
-Refer to [LibAdminSystem.http](https://github.com/DivyenduDutta/LibAdminSystem/blob/master/LibAdminSystem.http) for example JSON payloads for `PST/PUT`
+Refer to [LibAdminSystem.http](https://github.com/DivyenduDutta/LibAdminSystem/blob/master/LibAdminSystem.http) for example JSON payloads for `POST/PUT`
 
 ### Books
 
@@ -144,5 +146,20 @@ Refer to [LibAdminSystem.http](https://github.com/DivyenduDutta/LibAdminSystem/b
 | PUT    | `/api/loans/{id}/return` | Update details of a borrowed book    |
 | DELETE | `/api/loans/{id}`        | Cancel a loan |
 
+## Documentation
 
+LibAdminSystem uses Swagger UI via Swashbuckle. This provides a full interactive web UI where we can test endpoints right from 
+the browser.
+
+Run `Program.cs` and this will open up the API document UI at `http://localhost:<port>/index.html`
+
+The following functionality is provided via Swagger:
+
+- API endpoints grouped by route
+
+- Request/response schemas auto-generated from the model classes
+
+- “Try it out” button to execute requests against the running service
+
+<img src="swagger_api_doc.png" alt="api_doc_">
 
