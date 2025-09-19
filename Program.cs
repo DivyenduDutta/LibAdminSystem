@@ -85,6 +85,10 @@ public class Program
     {
         const bool SHOULD_LINQ_BE_RUN = false;
         var builder = WebApplication.CreateBuilder(args);
+        
+        // Add Swagger
+        builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddSwaggerGen();
 
         // Register DbContext via DI
         builder.Services.AddDbContext<LibraryContext>(options =>
@@ -94,6 +98,17 @@ public class Program
             ));
 
         var app = builder.Build();
+
+        // Enable Swagger in dev env
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseSwagger(); // Generates the metadata json at /swagger/v1/swagger.json
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "LibAdminSystem API v1");
+                c.RoutePrefix = string.Empty; // Swagger running at root `/`
+            });
+        }
 
         // Run seeding once at startup
         using (var scope = app.Services.CreateScope())
