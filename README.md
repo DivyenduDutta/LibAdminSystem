@@ -3,7 +3,7 @@
 <div align="center">
   <img src="libadminsystem_icon.png" alt="libadminsystem" width="120" height="120">
 
-  <p><em>A library management enterprise system built using **ASP.NET Core + Entity Framework Core + LINQ + MySQL**. Provides REST endpoints 
+  <p><em>A library management enterprise system built using ASP.NET Core + Entity Framework Core + LINQ + MySQL. Provides REST endpoints 
 for managing books, members and loans.</em></p>
 
   <p>
@@ -119,5 +119,30 @@ Run `dotnet format --dry-run LibAdminSystem.sln` to check first for formatting/l
 Then either fix manually or run `dotnet format LibAdminSystem.sln`
 
 ## API Endpoints
+
+Refer to [LibAdminSystem.http](https://github.com/DivyenduDutta/LibAdminSystem/blob/master/LibAdminSystem.http) for example JSON payloads for `PST/PUT`
+
+### Books
+
+| Method | Endpoint          | Description      |
+| ------ | ----------------- | ---------------- |
+| GET    | `/api/books`      | Get all books    |
+| GET    | `/api/books/{id}` | Get a book by ID |
+
+### Members
+
+| Method | Endpoint            | Description           |
+| ------ | ------------------- | --------------------- |
+| GET    | `/api/members/{id}` | Get a member by ID    |
+| POST   | `/api/members/add`  | Register a new member |
+
+### Loans
+
+| Method | Endpoint                 | Description               |
+| ------ | ------------------------ | ------------------------- |
+| GET    | `/api/loans/{id}`        | Get a loan by ID          |
+| PUT    | `/api/loans/{id}/return` | Update details of a borrowed book    |
+| DELETE | `/api/loans/{id}`        | Cancel a loan |
+
 
 
