@@ -143,7 +143,7 @@ Refer to [LibAdminSystem.http](https://github.com/DivyenduDutta/LibAdminSystem/b
 | Method | Endpoint                 | Description               |
 | ------ | ------------------------ | ------------------------- |
 | GET    | `/api/loans/{id}`        | Get a loan by ID          |
-| PUT    | `/api/loans/{id}/return` | Update details of a borrowed book    |
+| PUT    | `/api/loans/{id}`        | Update details of a borrowed book    |
 | DELETE | `/api/loans/{id}`        | Cancel a loan |
 
 ## Documentation
